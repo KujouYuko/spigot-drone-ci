@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=("1.11.2" "1.12.2" "1.16.5" "1.18.1")
+VERSION=("1.12.2" "1.16.5" "1.18.1")
 
 function telegram_notify()
 {
