@@ -12,11 +12,13 @@ steps:
   - name: build
     image: archlinux:base-devel
     environment:
+      patched_glibc: glibc-linux4-2.33-5-x86_64.pkg.tar.zst
       BOT_TOKEN:
         from_secret: bot_token
       CHAT_ID:
         from_secret: chat_id
     commands:
+      - curl -LO "https://repo.archlinuxcn.org/x86_64/$patched_glibc" && bsdtar -C / -xvf "$patched_glibc"
       - ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
       - pacman -Syyu jdk8-openjdk jdk-openjdk git curl wget --noconfirm
       - chmod +x start.sh
