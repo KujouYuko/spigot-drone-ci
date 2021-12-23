@@ -1,0 +1,23 @@
+kind: pipeline
+name: spigot-ci
+
+platform:
+  os: linux
+  arch: amd64
+
+clone:
+  depth: 1
+
+steps:
+  - name: build
+    image: archlinux:base-devel
+    environment:
+      BOT_TOKEN:
+        from_secret: bot_token
+      CHAT_ID:
+        from_secret: chat_id
+    commands:
+      - ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+      - pacman -Syyu jdk8-openjdk jdk-openjdk git curl wget --noconfirm
+      - chmod +x start.sh
+      - bash start.sh
